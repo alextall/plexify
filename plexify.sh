@@ -26,7 +26,6 @@ function transcode() {
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
   -o "${output_dir}/${title_name} - ${resolution}.mkv" \
-#   -v=1 \
   &> "${output_dir}/${title_name} - ${resolution} $(date).log"
   echo "Finished transcoding \"${input}\" to ${resolution}${framerate}."
 }
