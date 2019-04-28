@@ -9,7 +9,7 @@ PATH="/usr/local/bin/:${PATH}"
 readonly handbrake=$(command -v HandBrakeCLI)
 readonly input=${1}
 readonly title_name=$(basename "${input}" | sed 's/\.[^.]*$//')
-readonly output_dir='_finals'
+readonly input_dir=$(dirname "${input}")
 readonly height=$(ffprobe -v error \
   -show_entries stream=width,height \
   -of default=noprint_wrappers=1 "${input}" \
@@ -25,8 +25,8 @@ function transcode() {
   ${handbrake} --preset-import-gui \
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
-  -o "${output_dir}/${title_name} - ${resolution}.mkv" \
-  &> "${output_dir}/${title_name} - ${resolution} $(date).log"
+  -o "${input_dir}/${title_name} - ${resolution}.mkv" \
+  &> "${input_dir}/${title_name} - ${resolution} $(date).log"
   echo "Finished transcoding \"${input}\" to ${resolution}${framerate}."
 }
 
