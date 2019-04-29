@@ -18,17 +18,19 @@ readonly height=$(ffprobe -v error \
   | grep "height" \
   | sed s/[a-z]*[=]//)
 
-function transcode() {
+function transcode() { 
   resolution=${1}
   framerate=${2}
-  echo "$(date +"%Y-%m-%d %H:%M:%S"): Now transcoding \"${filename}\" to ${resolution}${framerate}."
+  echo "$(date +"%Y-%m-%d %H:%M:%S")"
+  echo "Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while. Why don't you grab a ${3}"
   ${handbrake} --preset-import-gui \
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
   -o "${input_dir}/${title_name} - ${resolution}.mkv" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
-  echo "$(date +"%Y-%m-%d %H:%M:%S"): Finished transcoding \"${filename}\" to ${resolution}${framerate}."
+  echo "$(date +"%Y-%m-%d %H:%M:%S")"
+  echo "Finished transcoding \"${filename}\" to ${resolution}${framerate}."
   echo
 }
 
@@ -42,4 +44,5 @@ if [ ${height} -gt '1080' ]; then
   transcode '4k' '60' '😴'
 fi
 
-echo "Finished transcoding \"${filename}\"."
+echo "Finished transcoding \"${filename}\""
+echo
