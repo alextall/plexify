@@ -21,7 +21,7 @@ readonly height=$(ffprobe -v error \
 function transcode() { 
   resolution=${1}
   framerate=${2}
-  echo "$(date +"%Y-%m-%d %H:%M:%S")"
+  echo "$(date +"%H:%M:%S")"
   echo "Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while. Why don't you grab a ${3}"
   ${handbrake} --preset-import-gui \
@@ -29,7 +29,7 @@ function transcode() {
   -i "${input}" \
   -o "${input_dir}/${title_name} - ${resolution}.mkv" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
-  echo "$(date +"%Y-%m-%d %H:%M:%S")"
+  echo "$(date +"%H:%M:%S")"
   echo "Finished transcoding \"${filename}\" to ${resolution}${framerate}."
   echo
 }
