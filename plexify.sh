@@ -8,8 +8,9 @@
 PATH="/usr/local/bin/:${PATH}"
 readonly handbrake=$(command -v HandBrakeCLI)
 readonly input=${1}
-readonly title_name=$(basename "${input}" | sed 's/\.[^.]*$//')
 readonly input_dir=$(dirname "${input}")
+readonly filename=$( echo ${input} | sed s:"${input_dir}/":: )
+readonly title_name=$(basename "${input}" | sed 's/\.[^.]*$//')
 readonly height=$(ffprobe -v error \
   -show_entries stream=width,height \
   -of default=noprint_wrappers=1 "${input}" \
@@ -20,14 +21,14 @@ readonly height=$(ffprobe -v error \
 function transcode() {
   resolution=${1}
   framerate=${2}
-  echo "Now transcoding \"${input}\" to ${resolution}${framerate}."
+  echo "Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while..."
   ${handbrake} --preset-import-gui \
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
   -o "${input_dir}/${title_name} - ${resolution}.mkv" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
-  echo "Finished transcoding \"${input}\" to ${resolution}${framerate}."
+  echo "Finished transcoding \"${filename}\" to ${resolution}${framerate}."
 }
 
 transcode '720p' '30'
