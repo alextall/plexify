@@ -15,7 +15,7 @@ readonly height=$(ffprobe -v error \
   -show_entries stream=width,height \
   -of default=noprint_wrappers=1 "${input}" \
   | grep -v "N/A" \
-  | grep "height" \
+  | grep -m 1 "height" \
   | sed s/[a-z]*[=]//)
 
 function transcode() { 
