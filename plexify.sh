@@ -12,11 +12,9 @@ readonly input_dir=$(dirname "${input}")
 readonly filename=$( echo ${input} | sed s:"${input_dir}/":: )
 readonly title_name=$(basename "${input}" | sed 's/\.[^.]*$//')
 readonly height=$(ffprobe -v error \
-  -show_entries stream=width,height \
-  -of default=noprint_wrappers=1 "${input}" \
-  | grep -v "N/A" \
-  | grep -m 1 "height" \
-  | sed s/[a-z]*[=]//)
+  -select_streams v:1 \
+  -show_entries stream=height \
+  -of default=noprint_wrappers=1:nokey=1 "${input}")
 
 function transcode() { 
   resolution=${1}
