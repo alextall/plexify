@@ -12,9 +12,9 @@ readonly input_dir=$(dirname "${input}")
 readonly filename=$( echo ${input} | sed s:"${input_dir}/":: )
 readonly title_name=$(basename "${input}" | sed 's/\.[^.]*$//')
 readonly height=$(ffprobe -v error \
-  -select_streams v:1 \
   -show_entries stream=height \
-  -of default=noprint_wrappers=1:nokey=1 "${input}")
+  -of default=noprint_wrappers=1:nokey=1 "${input}" \
+  | grep -m 1 "\d*")
 
 function transcode() { 
   resolution=${1}
