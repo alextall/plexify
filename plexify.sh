@@ -19,13 +19,18 @@ readonly height=$(ffprobe -v error \
 function transcode() { 
   resolution=${1}
   framerate=${2}
+  output="${input_dir}/${title_name} - ${resolution}.mkv"
+  if [ -s "${output}" ]; then 
+    echo "${output} already exists. Skipping."
+    break
+  fi
   echo "$(date +"%H:%M:%S")"
   echo "🎥 Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while. Why not grab a ${3}"
   ${handbrake} --preset-import-gui \
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
-  -o "${input_dir}/${title_name} - ${resolution}.mkv" \
+  -o "${output}" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
   echo "$(date +"%H:%M:%S")"
   echo "🚀 Finished transcoding \"${filename}\" to ${resolution}${framerate}."
