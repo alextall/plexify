@@ -22,7 +22,7 @@ function transcode() {
   output="${input_dir}/${title_name} - ${resolution}.mkv"
   if [ -s "${output}" ]; then 
     echo "${output} already exists. Skipping."
-    break
+    return
   fi
   echo "$(date +"%H:%M:%S")"
   echo "🎥 Now transcoding \"${filename}\" to ${resolution}${framerate}."
