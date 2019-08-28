@@ -3,7 +3,7 @@
 # Plexify.sh
 #
 # This script accepts a video file as input and transcodes it to lower bitrate 
-# 2160p, 1080p, and 720p copies depending on the source resolution.
+# 2160p, 1080p, 720p, and 480p copies depending on the source resolution.
 
 PATH="/usr/local/bin/:${PATH}"
 readonly handbrake=$(command -v HandBrakeCLI)
@@ -37,7 +37,11 @@ function transcode() {
   echo
 }
 
-transcode '720p' '30' '☕'
+transcode '480p' '30' '☕'
+
+if [ ${height} -gt '480' ]; then
+  transcode '720p' '30' '☕'
+fi
 
 if [ ${height} -gt '720' ]; then
   transcode '1080p' '60' '🥪'
