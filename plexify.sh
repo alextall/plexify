@@ -19,11 +19,14 @@ readonly height=$(ffprobe -v error \
 function transcode() { 
   resolution=${1}
   framerate=${2}
-  output="${input_dir}/${title_name} - ${resolution}.mkv"
+  output_filename="${title_name} - ${resolution}.mkv"
+  output="${input_dir}/${output_filename}"
   if [ -s "${output}" ]; then 
-    echo "${output} already exists. Skipping."
+    echo
+    echo "${output_filename} already exists. Skipping."
     return
   fi
+  echo
   echo "$(date +"%H:%M:%S")"
   echo "🎥 Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while. Why not grab a ${3}"
@@ -32,9 +35,9 @@ function transcode() {
   -i "${input}" \
   -o "${output}" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
+  echo
   echo "$(date +"%H:%M:%S")"
   echo "🚀 Finished transcoding \"${filename}\" to ${resolution}${framerate}."
-  echo
 }
 
 transcode '480p' '30' '☕'
@@ -51,5 +54,6 @@ if [ ${height} -gt '1080' ]; then
   transcode '4k' '60' '😴'
 fi
 
+echo
 echo "Finished transcoding \"${filename}\""
 echo
