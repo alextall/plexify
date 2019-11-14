@@ -21,20 +21,24 @@ function transcode() {
   framerate=${2}
   output_filename="${title_name} - ${resolution}.mkv"
   output="${input_dir}/${output_filename}"
+  
   if [ -s "${output}" ]; then 
     echo
     echo "${output_filename} already exists. Skipping."
     return
   fi
+  
   echo
   echo "$(date +"%H:%M:%S")"
   echo "🎥 Now transcoding \"${filename}\" to ${resolution}${framerate}."
   echo "This may take a while. Why not grab a ${3}"
+  
   ${handbrake} --preset-import-gui \
   -Z "${resolution}${framerate} mkv subtitles" \
   -i "${input}" \
   -o "${output}" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
+  
   echo
   echo "$(date +"%H:%M:%S")"
   echo "🚀 Finished transcoding \"${filename}\" to ${resolution}${framerate}."
