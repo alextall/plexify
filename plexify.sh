@@ -21,6 +21,7 @@ function transcode() {
   framerate=${2}
   output_filename="${title_name} - ${resolution}.mkv"
   output="${input_dir}/${output_filename}"
+  preset="${resolution}${framerate} mkv subtitles"
   
   if [ -s "${output}" ]; then 
     echo
@@ -34,7 +35,7 @@ function transcode() {
   echo "This may take a while. Why not grab a ${3}"
   
   ${handbrake} --preset-import-gui \
-  -Z "${resolution}${framerate} mkv subtitles" \
+  -Z "${preset}" \
   -i "${input}" \
   -o "${output}" \
   &> "${input_dir}/${title_name} - ${resolution} $(date +"%Y-%m-%d %H-%M-%S").log"
