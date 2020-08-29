@@ -15,6 +15,11 @@ readonly height=$(ffprobe -v error \
   -show_entries stream=height \
   -of default=noprint_wrappers=1:nokey=1 "${input}" \
   | grep -m 1 "\d*")
+  
+if [ ! -f ${input} ]; then
+  echo "${input} does not exist. Exiting."
+  return
+fi
 
 function transcode() { 
   resolution=${1}
