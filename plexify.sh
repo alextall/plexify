@@ -15,10 +15,16 @@ readonly height=$(ffprobe -v error \
   -show_entries stream=height \
   -of default=noprint_wrappers=1:nokey=1 "${input}" \
   | grep -m 1 "\d*")
-  
+
+if [ ! -f ${handbrake} ]; then
+  echo "Cannot find handbrake. Please install and try again."
+  echo "Exiting."
+  exit 1
+fi
+
 if [ ! -f ${input} ]; then
   echo "${input} does not exist. Exiting."
-  return
+  exit 2
 fi
 
 function transcode() { 
@@ -31,7 +37,7 @@ function transcode() {
   if [ -s "${output}" ]; then 
     echo
     echo "${output_filename} already exists. Skipping."
-    return
+    exit 3
   fi
   
   echo
