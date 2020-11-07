@@ -54,11 +54,15 @@
       "Mp4iPodCompatible" : false,
       "PictureAutoCrop" : true,
       "PictureBottomCrop" : 132,
+      "PictureChromaSmoothCustom" : "",
+      "PictureChromaSmoothPreset" : "off",
+      "PictureChromaSmoothTune" : "none",
       "PictureCombDetectCustom" : "",
       "PictureCombDetectPreset" : "default",
       "PictureDARWidth" : 0,
-      "PictureDeblock" : 0,
-      "PictureDeblockCustom" : "qp=0:mode=2",
+      "PictureDeblockCustom" : "strength=strong:thresh=20",
+      "PictureDeblockPreset" : "off",
+      "PictureDeblockTune" : "medium",
       "PictureDeinterlaceCustom" : "",
       "PictureDeinterlaceFilter" : "decomb",
       "PictureDeinterlacePreset" : "default",
@@ -103,7 +107,7 @@
       "UsesPictureFilters" : true,
       "UsesPictureSettings" : 2,
       "VideoAvgBitrate" : 8000,
-      "VideoColorMatrixCode" : 0,
+      "VideoColorMatrixCodeOverride" : 0,
       "VideoEncoder" : "x265",
       "VideoFramerate" : "60",
       "VideoFramerateMode" : "pfr",
@@ -124,7 +128,7 @@
       "x264UseAdvancedOptions" : false
     }
   ],
-  "VersionMajor" : 34,
+  "VersionMajor" : 42,
   "VersionMicro" : 0,
   "VersionMinor" : 0
 }
